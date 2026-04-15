@@ -2,7 +2,7 @@ import streamlit as st, matplotlib.pyplot as plt
 
 
 # NASTAVENÍ STRÁNKY (Titulek v prohlížeči a ikona)
-st.set_page_config(page_title="Investiční poradce Marek", page_icon="💰")
+st.set_page_config(page_title="Investiční poradce Marek", page_icon=":chart_with_upwards_trend:", layout="wide")
 
 # --- ÚVODNÍ SEKCE ---
 st.title("📊 Nechte to na Robo poradci!")
@@ -160,22 +160,60 @@ if st.button("📈 Zjistit můj investiční profil", type="primary"):
             st.write("Vaší prioritou je bezpečí a ochrana kapitálu. Nesnášíte propady na trzích a jste ochoten/a přijmout nižší výnos a jste smířeni s tím, že váš výnos nemusí ani pokrýt inflaci.")
             st.subheader("Doporučené rozložení aktiv:")
             st.info("- 70 % Spořicí účty, stavební a penzijní spoření\n- 20 % Konzervativní podílové fondy (dluhopisové)\n- 10 % Jednotlivé akcie")
+            labels = ['Spořicí účty', 'Konzervativní podílové fondy (dluhopisy)', 'Jednotlivé akcie']
+            sizes = [70, 20, 10]
+            colors = ['#ff9999','#66b3ff','#99ff99','#ffcc99']
 
-        elif 31 < total_score <= 40:
+            fig, ax = plt.subplots()
+            fig.patch.set_alpha(0.0)
+            ax.patch.set_alpha(0.0)
+            wedges, texts, autotexts = ax.pie(
+                sizes, 
+                labels=labels, 
+                autopct='%1.1f%%', 
+                startangle=90, 
+                colors=colors
+            )
+            for text in texts:
+                text.set_color('white')
+            ax.axis('equal') #kulatý
+            st.write("### Doporučená struktura portfolia")
+            st.pyplot(fig)
+
+        elif total_score <= 40:
             st.warning("⚖️ Tvůj profil: Opatrný investor")
             st.subheader("Charakteristika:")
             st.write("Hledáte kompromis mezi výnosem a rizikem. Rozumíte tomu, že běžný účet vám zhodnocení nepřinese, ale stále preferujete nižší výnos s větší jistotou..")
             st.subheader("Doporučené rozložení aktiv:")
-            st.info("- 50 % Indexová ETF (např. S&P 500, MSCI World)\n- 30 % Státní a korporátní dluhopisy\n- 15 % Nemovitosti (fondy nebo fyzické)\n- 5 % Kryptoměny")
+            st.info("- 50 % Indexová ETF (např. S&P 500, MSCI World)\n- 30 % Dluhopisy\n- 15 % Nemovitosti (fondy nebo fyzické)\n- 5 % Kryptoměny")
+            labels = ['Akcie', 'Dluhopisy', 'Nemovitosti', 'Kryptoměny']
+            sizes = [50, 30, 15,5]
+            colors = ['#ff9999','#66b3ff','#99ff99','#ffcc99']
 
-        elif 41 < total_score <= 50:
+            fig, ax = plt.subplots()
+            fig.patch.set_alpha(0.0)
+            ax.patch.set_alpha(0.0)
+            wedges, texts, autotexts = ax.pie(
+                sizes, 
+                labels=labels, 
+                autopct='%1.1f%%', 
+                startangle=90, 
+                colors=colors
+            )
+            for text in texts:
+                text.set_color('white')
+            ax.axis('equal') #kulatý
+            st.write("### Doporučená struktura portfolia")
+            st.pyplot(fig)
+
+        elif total_score <= 50:
             st.warning("📊Tvůj profil: Vyvážený investor")
             st.subheader("Charakteristika:")
             st.write("Jste si plně vědomi vztahu mezi rizikem a výnosem, jste ochotni podstoupit střední míru rizika a akceptovat krátkodobé propady trhů, protože víte, že historicky rostou.")
             st.subheader("Doporučené rozložení aktiv:")
             st.info("- 60% Akcie a ETF (Apple, Google, S&P 500,MSCI World )\n - 30% Dluhopisy\n 10% Spořicí účty, stavební a penzijní spoření")
-            labels = ['Akciová ETF', 'Dluhopisy', 'Nemovitosti', 'Hotovost']
-            sizes = [55, 25, 15, 5] # Procenta, musí dát dohromady 100
+            labels = ['Akcie a ETF', 'Dluhopisy', 'Spořicí účty, stavební a penzijní spoření']
+            sizes = [60, 30, 10] # Procenta, musí dát dohromady 100
             colors = ['#ff9999','#66b3ff','#99ff99','#ffcc99']
                 # TVORBA GRAFU (Matplotlib)
             fig, ax = plt.subplots()
@@ -202,7 +240,26 @@ if st.button("📈 Zjistit můj investiční profil", type="primary"):
             st.subheader("Charakteristika:")
             st.write("Cílíte na maximální dlouhodobý výnos a počítáte s vysokým rizikem. Výrazné propady na trzích vás nerozhodí, naopak je berete jako příležitost k nákupu.")
             st.subheader("Doporučené rozloženi aktiv:")
-            st.info("- 70 % Akcie (jednotlivé tituly, růstová ETF, rozvíjející se trhy)\n- 15 % Kryptoměny (širší portfolio)\n- 10 % Komodity / Alternativní investice\n- 5 % Hotovost / Dluhopisy")
+            st.info("- 70 % Akcie (jednotlivé tituly, růstová ETF, rozvíjející se trhy)\n- 15 % Kryptoměny (širší portfolio)\n- 10 % Komodity / Alternativní investice")
+            labels = ['Akcie', 'Kryptoměny', 'Komodity / Alternativní investice']
+            sizes = [70, 20, 10]
+            colors = ['#ff9999','#66b3ff','#99ff99','#ffcc99']
+
+            fig, ax = plt.subplots()
+            fig.patch.set_alpha(0.0)
+            ax.patch.set_alpha(0.0)
+            wedges, texts, autotexts = ax.pie(
+                sizes, 
+                labels=labels, 
+                autopct='%1.1f%%', 
+                startangle=90, 
+                colors=colors
+            )
+            for text in texts:
+                text.set_color('white')
+            ax.axis('equal') #kulatý
+            st.write("### Doporučená struktura portfolia")
+            st.pyplot(fig)
 
 # --- PATIČKA ---
 st.divider()
