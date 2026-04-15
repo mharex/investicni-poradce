@@ -2,12 +2,12 @@ import streamlit as st, matplotlib.pyplot as plt
 
 
 # NASTAVENÍ STRÁNKY (Titulek v prohlížeči a ikona)
-st.set_page_config(page_title="Investiční poradce Marek", page_icon=":chart_with_upwards_trend:", layout="wide")
+st.set_page_config(page_title="Investiční automatizovaný poradce", page_icon=":chart_with_upwards_trend:", layout="wide")
 
 # --- ÚVODNÍ SEKCE ---
 st.title("📊 Nechte to na Robo poradci!")
 st.subheader("Nechte automatizaci, ať udělá to nejtěžší za vás. Po zodpovězení na několik otázek obdržíte personalisované portfolio, které jde naproti vašim investičním cílům.")
-st.write("Odpovězte, prosím, upřímně na následujících 20 otázek. Na základě vašich odpovědí se pokusím Vám doporučit vhodnou strategii.")
+st.write("Odpovězte, prosím, upřímně na následujících 20 otázek. Na základě vašich odpovědí se pokusím doporučit vhodnou strategii.")
 
 st.divider()
 
@@ -165,6 +165,7 @@ if st.button("📈 Zjistit můj investiční profil", type="primary"):
             colors = ['#ff9999','#66b3ff','#99ff99','#ffcc99']
 
             fig, ax = plt.subplots()
+            fig, ax = plt.subplots(figsize=(4, 3))
             fig.patch.set_alpha(0.0)
             ax.patch.set_alpha(0.0)
             wedges, texts, autotexts = ax.pie(
@@ -191,6 +192,7 @@ if st.button("📈 Zjistit můj investiční profil", type="primary"):
             colors = ['#ff9999','#66b3ff','#99ff99','#ffcc99']
 
             fig, ax = plt.subplots()
+            fig, ax = plt.subplots(figsize=(4, 3))
             fig.patch.set_alpha(0.0)
             ax.patch.set_alpha(0.0)
             wedges, texts, autotexts = ax.pie(
@@ -217,6 +219,7 @@ if st.button("📈 Zjistit můj investiční profil", type="primary"):
             colors = ['#ff9999','#66b3ff','#99ff99','#ffcc99']
                 # TVORBA GRAFU (Matplotlib)
             fig, ax = plt.subplots()
+            fig, ax = plt.subplots(figsize=(4, 3))
             fig.patch.set_alpha(0.0)
             ax.patch.set_alpha(0.0)
 
@@ -246,6 +249,7 @@ if st.button("📈 Zjistit můj investiční profil", type="primary"):
             colors = ['#ff9999','#66b3ff','#99ff99','#ffcc99']
 
             fig, ax = plt.subplots()
+            fig, ax = plt.subplots(figsize=(4, 3))
             fig.patch.set_alpha(0.0)
             ax.patch.set_alpha(0.0)
             wedges, texts, autotexts = ax.pie(
