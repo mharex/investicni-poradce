@@ -1,4 +1,5 @@
-import streamlit as st
+import streamlit as st, matplotlib.pyplot as plt
+
 
 # NASTAVENÍ STRÁNKY (Titulek v prohlížeči a ikona)
 st.set_page_config(page_title="Investiční poradce Marek", page_icon="💰")
@@ -170,10 +171,31 @@ if st.button("📈 Zjistit můj investiční profil", type="primary"):
         elif 41 < total_score <= 50:
             st.warning("📊Tvůj profil: Vyvážený investor")
             st.subheader("Charakteristika:")
-            st.write("Jste si plně vědomi vztahu mezi rizikem a výnosem, jste ochotni podstoupit střední míru rizika a akceptovat krátkodobé propady trhů, protože víte, že dlouhodobě historicky rostou.")
+            st.write("Jste si plně vědomi vztahu mezi rizikem a výnosem, jste ochotni podstoupit střední míru rizika a akceptovat krátkodobé propady trhů, protože víte, že historicky rostou.")
             st.subheader("Doporučené rozložení aktiv:")
-            st.info("- 60% Akcie a ETF (Apple, Google, S&P 500,MSCI World )\n - 20-30% Dluhopisy")
-    
+            st.info("- 60% Akcie a ETF (Apple, Google, S&P 500,MSCI World )\n - 30% Dluhopisy\n 10% Spořicí účty, stavební a penzijní spoření")
+            labels = ['Akciová ETF', 'Dluhopisy', 'Nemovitosti', 'Hotovost']
+            sizes = [55, 25, 15, 5] # Procenta, musí dát dohromady 100
+            colors = ['#ff9999','#66b3ff','#99ff99','#ffcc99']
+                # TVORBA GRAFU (Matplotlib)
+            fig, ax = plt.subplots()
+            fig.patch.set_alpha(0.0)
+            ax.patch.set_alpha(0.0)
+
+            wedges, texts, autotexts = ax.pie(
+                sizes, 
+                labels=labels, 
+                autopct='%1.1f%%', 
+                startangle=90, 
+                colors=colors
+            )
+            for text in texts:
+                text.set_color('white')
+            ax.axis('equal')  # Zajistí, že koláč bude kulatý
+                
+                # ZOBRAZENÍ VE STREAMLITU
+            st.write("### Doporučená struktura portfolia")
+            st.pyplot(fig)
 
         else:
             st.error("🚀 Tvůj profil: Dynamický (Růstový) investor")
