@@ -5,7 +5,7 @@ st.set_page_config(page_title="Investiční automatizovaný poradce", page_icon=
 
 
 st.title("📊 Nechte to na Robo poradci!")
-st.subheader("Nechte automatizaci, ať udělá to nejtěžší za vás. Po zodpovězení na několik otázek obdržíte personalisované portfolio, které jde naproti vašim investičním cílům.")
+st.subheader("Nechte automatizaci, ať udělá to nejtěžší za vás. Po zodpovězení několika otázek obdržíte personalisované portfolio, které jde naproti vašim investičním cílům.")
 st.write("Odpovězte, prosím, upřímně na následujících 20 otázek. Na základě vašich odpovědí se pokusím doporučit vhodnou strategii.")
 
 st.divider()
@@ -255,4 +255,4 @@ if st.button("📈 Zjistit můj investiční profil", type="primary"):
 
 
 st.divider()
-st.caption("Upozornění: Tento nástroj slouží pouze pro vzdělávací a demonstrační účely v rámci seminární práce. Návratnost původně investované částky není zaručena. Nejedná se o investiční poradenství.")
+st.caption("Tento nástroj slouží pouze pro vzdělávací a demonstrační účely v rámci seminární práce. Návratnost původně investované částky není zaručena. Nejedná se o investiční poradenství.")
