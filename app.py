@@ -1,19 +1,15 @@
 import streamlit as st, matplotlib.pyplot as plt
 
 
-# NASTAVENÍ STRÁNKY (Titulek v prohlížeči a ikona)
-st.set_page_config(page_title="Investiční automatizovaný poradce", page_icon=":chart_with_upwards_trend:", layout="wide")
+st.set_page_config(page_title="Investiční automatizovaný poradce", page_icon=":chart_with_upwards_trend:", layout="centered")
 
-# --- ÚVODNÍ SEKCE ---
+
 st.title("📊 Nechte to na Robo poradci!")
 st.subheader("Nechte automatizaci, ať udělá to nejtěžší za vás. Po zodpovězení na několik otázek obdržíte personalisované portfolio, které jde naproti vašim investičním cílům.")
 st.write("Odpovězte, prosím, upřímně na následujících 20 otázek. Na základě vašich odpovědí se pokusím doporučit vhodnou strategii.")
 
 st.divider()
 
-# --- DEFINICE OTÁZEK A BODOVÁNÍ (Seznam slovníků) ---
-# Každá otázka má text, možnosti a body pro každou možnost.
-# Body: 1 = Konzervativní, 2 = Vyvážený, 3 = Dynamický
 questions_data = [
     {
         "question": "1. Jaký je váš hlavní cíl investování?",
@@ -117,29 +113,23 @@ questions_data = [
     }
 ]
 
-# --- ZOBRAZENÍ OTÁZEK A SBĚR ODPOVĚDÍ ---
-# Budeme ukládat indexy vybraných odpovědí
+
 user_answers = []
 
 st.header("📋 Dotazník")
 st.write("Vyberte prosím jednu odpověď u každé otázky:")
 
-# Procházíme data a vytváříme st.radio pro každou otázku
 for i, item in enumerate(questions_data):
-    # Klíč musí být unikátní, používáme index
     answer_idx = st.radio(item["question"], item["options"], key=f"q_{i}", index=None)
     user_answers.append(answer_idx)
-    st.write("---") # Oddělovač pro přehlednost
+    st.write("---")
 
-# --- TLAČÍTKO PRO VYHODNOCENÍ ---
 st.divider()
 if st.button("📈 Zjistit můj investiční profil", type="primary"):
     
-    # Kontrola, zda uživatel odpověděl na všechny otázky
     if None in user_answers:
         st.error("⚠️ Prosím, odpovězte na všechny otázky před vyhodnocením.")
     else:
-        # Výpočet celkového skóre
         total_score = 0
         for i, answered_option in enumerate(user_answers):
             # Zjistíme index vybrané možnosti v seznamu options
@@ -147,13 +137,12 @@ if st.button("📈 Zjistit můj investiční profil", type="primary"):
             # Přičteme odpovídající body
             total_score += questions_data[i]["points"][option_index]
             
-        # Zobrazení výsledku
         st.divider()
         st.header(f"Výsledek: Vaše skóre je {total_score} bodů")
         
-        # Minimální skóre je 20 (vše za 1 bod), maximální 60 (vše za 3 body).
+
         
-        # LOGIKA PRO ROZŘAZENÍ DO SKUPIN
+
         if total_score <= 30:
             st.success("🧱 Tvůj profil: Defenzivní investor")
             st.subheader("Charakteristika:")
@@ -177,7 +166,7 @@ if st.button("📈 Zjistit můj investiční profil", type="primary"):
             )
             for text in texts:
                 text.set_color('white')
-            ax.axis('equal') #kulatý
+            ax.axis('equal') #kulaty
             st.write("### Doporučená struktura portfolia")
             st.pyplot(fig)
 
@@ -204,7 +193,7 @@ if st.button("📈 Zjistit můj investiční profil", type="primary"):
             )
             for text in texts:
                 text.set_color('white')
-            ax.axis('equal') #kulatý
+            ax.axis('equal') 
             st.write("### Doporučená struktura portfolia")
             st.pyplot(fig)
 
@@ -213,11 +202,11 @@ if st.button("📈 Zjistit můj investiční profil", type="primary"):
             st.subheader("Charakteristika:")
             st.write("Jste si plně vědomi vztahu mezi rizikem a výnosem, jste ochotni podstoupit střední míru rizika a akceptovat krátkodobé propady trhů, protože víte, že historicky rostou.")
             st.subheader("Doporučené rozložení aktiv:")
-            st.info("- 60% Akcie a ETF (Apple, Google, S&P 500,MSCI World )\n - 30% Dluhopisy\n 10% Spořicí účty, stavební a penzijní spoření")
+            st.info("- 60% Akcie a ETF (Apple, Google, S&P 500,MSCI World )\n - 30% Dluhopisy\n - 10% Spořicí účty, stavební a penzijní spoření")
             labels = ['Akcie a ETF', 'Dluhopisy', 'Spořicí účty, stavební a penzijní spoření']
-            sizes = [60, 30, 10] # Procenta, musí dát dohromady 100
+            sizes = [60, 30, 10] 
             colors = ['#ff9999','#66b3ff','#99ff99','#ffcc99']
-                # TVORBA GRAFU (Matplotlib)
+
             fig, ax = plt.subplots()
             fig, ax = plt.subplots(figsize=(4, 3))
             fig.patch.set_alpha(0.0)
@@ -232,9 +221,8 @@ if st.button("📈 Zjistit můj investiční profil", type="primary"):
             )
             for text in texts:
                 text.set_color('white')
-            ax.axis('equal')  # Zajistí, že koláč bude kulatý
+            ax.axis('equal')  
                 
-                # ZOBRAZENÍ VE STREAMLITU
             st.write("### Doporučená struktura portfolia")
             st.pyplot(fig)
 
@@ -243,7 +231,7 @@ if st.button("📈 Zjistit můj investiční profil", type="primary"):
             st.subheader("Charakteristika:")
             st.write("Cílíte na maximální dlouhodobý výnos a počítáte s vysokým rizikem. Výrazné propady na trzích vás nerozhodí, naopak je berete jako příležitost k nákupu.")
             st.subheader("Doporučené rozloženi aktiv:")
-            st.info("- 70 % Akcie (jednotlivé tituly, růstová ETF, rozvíjející se trhy)\n- 15 % Kryptoměny (širší portfolio)\n- 10 % Komodity / Alternativní investice")
+            st.info("- 70 % Akcie (jednotlivé tituly, růstová ETF, rozvíjející se trhy)\n- 20 % Kryptoměny (širší portfolio)\n- 10 % Komodity / Alternativní investice")
             labels = ['Akcie', 'Kryptoměny', 'Komodity / Alternativní investice']
             sizes = [70, 20, 10]
             colors = ['#ff9999','#66b3ff','#99ff99','#ffcc99']
@@ -261,10 +249,10 @@ if st.button("📈 Zjistit můj investiční profil", type="primary"):
             )
             for text in texts:
                 text.set_color('white')
-            ax.axis('equal') #kulatý
+            ax.axis('equal')
             st.write("### Doporučená struktura portfolia")
             st.pyplot(fig)
 
-# --- PATIČKA ---
+
 st.divider()
-st.caption("Upozornění: Tento nástroj slouží pouze pro vzdělávací a demonstrační účely v rámci seminární práce. Nejedná se o investiční poradenství.")
+st.caption("Upozornění: Tento nástroj slouží pouze pro vzdělávací a demonstrační účely v rámci seminární práce. Návratnost původně investované částky není zaručena. Nejedná se o investiční poradenství.")
